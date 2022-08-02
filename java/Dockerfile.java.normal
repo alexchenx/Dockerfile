@@ -1,0 +1,7 @@
+FROM openjdk:8-jdk-slim
+
+WORKDIR /app
+
+COPY target/*.jar /app/app.jar
+
+ENTRYPOINT ["java","-jar","-Duser.timezone=GMT+08","/app/app.jar"]

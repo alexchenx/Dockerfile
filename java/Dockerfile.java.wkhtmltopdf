@@ -1,0 +1,13 @@
+FROM openjdk:8-jdk-slim
+
+WORKDIR /app
+
+COPY wkhtmltopdf/wkhtmltox_0.12.6.1-2.bullseye_amd64.deb /tmp/wkhtmltox_0.12.6.1-2.bullseye_amd64.deb
+COPY sources.list /etc/apt/sources.list
+RUN apt-get update
+RUN apt-get install fontconfig libfreetype6 libjpeg62-turbo libpng16-16 libx11-6 libxcb1 libxext6 libxrender1 xfonts-75dpi xfonts-base -y
+RUN dpkg -i /tmp/wkhtmltox_0.12.6.1-2.bullseye_amd64.deb
+
+COPY target/*.jar /app/app.jar
+
+ENTRYPOINT ["java","-jar","-Duser.timezone=GMT+08","/app/app.jar"]

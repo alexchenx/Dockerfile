@@ -1,0 +1,11 @@
+FROM node:6.2.2-slim
+
+WORKDIR /app/VoIP-Learner
+
+COPY . /app/VoIP-Learner/
+RUN npm set registry http://registry.npmmirror.com
+RUN npm install
+
+CMD node /app/VoIP-Learner/bin/www
+
+EXPOSE 8089
